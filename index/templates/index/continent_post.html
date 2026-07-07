@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head lang="fa" dir="rtl">
+    <meta charset="UTF-8">
+    <title>{{ continent.name }}</title>
+</head>
+<body>
+
+<h1>
+قاره
+{{ continent.name }}
+</h1>
+
+<hr>
+
+{% for post in posts %}
+
+<h3>{{ post.title }}</h3>
+
+<p>{{ post.country.name }}</p>
+
+<a href="{% url 'post_detail' post.id %}">
+مشاهده
+</a>
+
+<hr>
+
+{% empty %}
+
+<p>پستی وجود ندارد.</p>
+
+{% endfor %}
+
+</body>
+</html>

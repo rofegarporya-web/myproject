@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head lang="fa" dir="rtl">
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+
+<h1>{{ post.title }}</h1>
+
+<p>
+کشور :
+{{ post.country.name }}
+</p>
+
+<p>
+قاره :
+{{ post.country.continent.name }}
+</p>
+
+<p>
+{{ post.content }}
+</p>
+
+<hr>
+
+<h2>گالری تصاویر</h2>
+
+{% for image in images %}
+
+<img src="{{ image.img.url }}" width="400">
+
+{% empty %}
+
+<p>عکسی ثبت نشده است.</p>
+
+{% endfor %}
+
+</body>
+</html>

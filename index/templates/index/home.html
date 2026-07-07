@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مجله گردشگری</title>
+
+    <style>
+
+        body{
+            direction: rtl;
+            text-align: right;
+            font-family: Tahoma;
+        }
+
+        header{
+            background:#1f2937;
+            color:white;
+            padding:20px;
+            text-align:center;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+            margin-top:30px;
+        }
+
+        .featured{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            margin-bottom:40px;
+            box-shadow:0 0 10px rgba(0,0,0,.15);
+        }
+
+        .posts{
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+        }
+
+        .card{
+            width:300px;
+            background:white;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 0 10px rgba(0,0,0,.15);
+        }
+
+        .card img{
+            width:100%;
+            height:200px;
+            object-fit:cover;
+        }
+
+        .card-body{
+            padding:15px;
+        }
+
+        a{
+            text-decoration:none;
+            color:#1565c0;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>مجله گردشگری</h1>
+
+</header>
+
+<div class="container">
+
+
+    <div class="featured">
+
+        <h2>⭐ مقاله ویژه</h2>
+
+        {% if featured_post %}
+
+            <h3>{{ featured_post.title }}</h3>
+
+            <p>
+
+                کشور :
+                {{ featured_post.country.name }}
+
+            </p>
+
+            <p>
+
+                قاره :
+                {{ featured_post.country.continent.name }}
+
+            </p>
+
+            <a href="{% url 'post_detail' featured_post.id %}">
+
+                مشاهده مقاله
+
+            </a>
+
+        {% else %}
+
+            <p>مقاله ویژه ای وجود ندارد.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <h2>آخرین مطالب</h2>
+
+    <div class="posts">
+
+        {% for post in posts %}
+
+        <div class="card">
+
+            {% if post.images.first %}
+
+                <img src="{{ post.images.first.img.url }}">
+
+            {% endif %}
+
+            <div class="card-body">
+
+                <h3>{{ post.title }}</h3>
+
+                <p>
+
+                    {{ post.country.name }}
+
+                </p>
+
+                <p>
+
+                    {{ post.created_at }}
+
+                </p>
+
+                <a href="{% url 'post_detail' post.id %}">
+
+                    ادامه مطلب →
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
